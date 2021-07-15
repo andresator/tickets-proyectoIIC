@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ticketSystem;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,6 +19,19 @@ public class loginScreen extends javax.swing.JFrame {
         initComponents();
     }
 
+    /** Returns an ImageIcon, or null if the path was invalid. */
+    protected ImageIcon createImageIcon(String path,
+                                           String description) {
+    java.net.URL imgURL = getClass().getResource(path);
+    if (imgURL != null) {
+        return new ImageIcon(imgURL, description);
+    } else {
+        System.err.println("Couldn't find file: " + path);
+        return null;
+    }
+}
+    
+    ImageIcon helpdesk = createImageIcon("/resources/helpdeskIcon.png","");
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,7 +62,7 @@ public class loginScreen extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/helpdeskIcon.png"))); // NOI18N
+        jLabel3.setIcon(helpdesk);
         jLabel3.setText("Centro de Asistencia Informático Empresarial");
 
         jButton1.setText("Iniciar sesión");
@@ -89,7 +103,7 @@ public class loginScreen extends javax.swing.JFrame {
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();

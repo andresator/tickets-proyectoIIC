@@ -5,10 +5,6 @@
  */
 package ticketSystem;
 
-/**
- *
- * @author Andres
- */
 public class createTicket extends javax.swing.JFrame {
 
     /**
