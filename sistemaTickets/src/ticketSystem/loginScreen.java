@@ -17,6 +17,8 @@ public class loginScreen extends javax.swing.JFrame {
      */
     public loginScreen() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     /** Returns an ImageIcon, or null if the path was invalid. */
@@ -49,6 +51,7 @@ public class loginScreen extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Iniciar sesión");
 
         jLabel1.setText("Usuario:");
 
@@ -63,7 +66,7 @@ public class loginScreen extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(helpdesk);
-        jLabel3.setText("Centro de Asistencia Informático Empresarial");
+        jLabel3.setText("Centro de Asistencia de TI Empresarial");
 
         jButton1.setText("Iniciar sesión");
 
@@ -71,9 +74,9 @@ public class loginScreen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
+                .addGap(132, 132, 132)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
