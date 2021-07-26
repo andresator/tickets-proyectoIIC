@@ -1,23 +1,66 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ticketSystem;
 
-/**
- *
- * @author Andres
- */
-public class userDashboard extends javax.swing.JFrame {
+import java.io.DataInputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
+public class userDashboard extends javax.swing.JFrame {
+    protected DefaultTableModel model=new DefaultTableModel();
     /**
      * Creates new form userDashboard
      */
     public userDashboard() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Centro de Asistencia Informático");
+        jTable1.setModel(model);
     }
-
+    
+    public void llenarTabla(){
+    String tiq, status, user, summry, prirty, phone,email,
+                cMethod,description,assigned;
+        String encabezados[]=new String[]{"Tiquete","Estado",
+            "Usuario","Resumen","Prioridad"};
+        model.setColumnIdentifiers(encabezados);
+        model.setRowCount(0);
+        try {
+            DataInputStream entrada = new DataInputStream(
+                    new FileInputStream("ticket.dat"));
+            try {
+                while (true) {
+                    tiq = entrada.readUTF();
+                    status = entrada.readUTF();
+                    user = entrada.readUTF();
+                    summry = entrada.readUTF();
+                    prirty = entrada.readUTF();
+                    phone = entrada.readUTF();
+                    email = entrada.readUTF();
+                    cMethod = entrada.readUTF();
+                    description = entrada.readUTF();
+                    assigned = entrada.readUTF();
+                    model.addRow(new Object[]{tiq,status,user,summry,prirty});
+                }
+            } catch (EOFException ex) {
+                entrada.close();
+            }
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "¡El archivo no existe!", "Archivo no existe",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "¡Error desconocido!", "Error desconocido",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,6 +75,7 @@ public class userDashboard extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -53,22 +97,35 @@ public class userDashboard extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "# Tiquete", "Title 2", "Title 3", "Title 4"
+                "Tiquete", "Estado", "Usuario", "Resumen", "Prioridad"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton2.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        jButton2.setText("Refrescar tabla");
+        jButton2.setText("Cargar tiquetes");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        jButton3.setText("Ver tiquete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -96,6 +153,8 @@ public class userDashboard extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
@@ -110,7 +169,8 @@ public class userDashboard extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -126,8 +186,12 @@ public class userDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        llenarTabla();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,6 +231,7 @@ public class userDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -174,6 +239,6 @@ public class userDashboard extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    protected javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

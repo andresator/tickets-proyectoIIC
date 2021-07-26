@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ticketSystem;
 
+package ticketSystem;
+import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicLong;
 import java.io.File;
 
 /**
@@ -12,11 +9,25 @@ import java.io.File;
  * @author Andres
  */
 public class tests {
+    
+    public enum EventNumberSequenceGenerator {
+    EVENT_SEQ(Calendar.getInstance().getTimeInMillis());
+ 
+    private AtomicLong currentId;
+ 
+    EventNumberSequenceGenerator(long timeInMillisRightNow) {
+        this.currentId = new AtomicLong(timeInMillisRightNow);
+    }
+ 
+    public long getNext() {
+        return currentId.incrementAndGet();
+    }
+}
     public static void main(String[] args) {
-        ticketActions ta = new ticketActions();
-        File file = new File("ticket.dat");
-        // calling method
-        ta.readFromLast(file);
-        //rf.reverseLines(file);
+        getNext();
         } 
+    
+    
+ 
+
 }
