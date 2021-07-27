@@ -5,6 +5,7 @@
  */
 package ticketSystem;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,10 +46,10 @@ public class loginScreen extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        login_user = new javax.swing.JTextField();
+        login_password = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        LoginButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar sesión");
@@ -57,9 +58,9 @@ public class loginScreen extends javax.swing.JFrame {
 
         jLabel2.setText("Contraseña:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        login_user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                login_userActionPerformed(evt);
             }
         });
 
@@ -68,7 +69,12 @@ public class loginScreen extends javax.swing.JFrame {
         jLabel3.setIcon(helpdesk);
         jLabel3.setText("Centro de Asistencia de TI Empresarial");
 
-        jButton1.setText("Iniciar sesión");
+        LoginButton.setText("Iniciar sesión");
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,11 +90,11 @@ public class loginScreen extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(login_user)
+                            .addComponent(login_password, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(jButton1)))
+                        .addComponent(LoginButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -99,22 +105,59 @@ public class loginScreen extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(login_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(login_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(LoginButton)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void login_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_userActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_login_userActionPerformed
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+       EmployedIdentity identity = new EmployedIdentity();
+       
+       var passTony = "1234";
+       var passAndres = "2468";
+       
+       if((login_user.getText().equals("tonarias") && (passTony.equals(new String((login_password.getPassword())))))){
+            identity.setName("Anthony");
+            identity.setLastname("Arias");
+            identity.setEmail("anthony@company.com");
+            identity.setEmployedNumber("9000108");
+            identity.setCompanyId("1");
+            identity.setAccessLevel(1);
+            
+            userDashboard secondFrame = new userDashboard();
+            secondFrame.getData(identity.getName());
+            secondFrame.setVisible(true);
+            dispose();
+            
+       } else if ((login_user.getText().equals("andchavarria") && (passAndres.equals(new String((login_password.getPassword())))))) {
+            identity.setName("Andres");
+            identity.setLastname("Chavarria");
+            identity.setEmail("andres@company.com");
+            identity.setEmployedNumber("9000100");
+            identity.setCompanyId("1");
+            identity.setAccessLevel(1);
+            
+            userDashboard secondFrame = new userDashboard();
+            secondFrame.getData(identity.getName());
+            secondFrame.setVisible(true);
+            dispose();
+       } else {
+           JOptionPane.showMessageDialog(rootPane, "No existe usuario");
+       }
+  
+    }//GEN-LAST:event_LoginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,11 +195,11 @@ public class loginScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton LoginButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField login_password;
+    private javax.swing.JTextField login_user;
     // End of variables declaration//GEN-END:variables
 }
