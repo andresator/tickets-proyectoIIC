@@ -5,6 +5,8 @@
  */
 package ticketSystem;
 
+import javax.swing.JOptionPane;
+
 public class createTicket extends javax.swing.JFrame {
 
     /**
@@ -13,6 +15,9 @@ public class createTicket extends javax.swing.JFrame {
     public createTicket() {
         initComponents();
         setResizable(false);
+        ticketActions ticket=new ticketActions();
+        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -120,6 +125,11 @@ public class createTicket extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -271,12 +281,38 @@ public class createTicket extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        ticketActions ticket=new ticketActions();
-       ticket.agregar(jTextField1.getText(), jTextField2.getText(), 
-               jTextField3.getText(), jTextField9.getText(), 
-               jComboBox1.getSelectedItem().toString(), 
-               jComboBox2.getSelectedItem().toString(), 
-               jTextField10.getText(), jTextArea1.getText(), "Abierto", "");
+       if (jTextField1.getText().equals("")) {
+           JOptionPane.showMessageDialog(null,"Debe escribir el número de tiquete.",
+                   "Error de creación",JOptionPane.ERROR_MESSAGE);
+           
+       } if(jTextField2.getText().equals("")){
+           JOptionPane.showMessageDialog(null,"Debe escribir su nombre.",
+                   "Error de creación",JOptionPane.ERROR_MESSAGE);
+       } if(jTextField9.getText().equals("")){
+           JOptionPane.showMessageDialog(null,"Debe escribir su correo electronico.",
+                   "Error de creación",JOptionPane.ERROR_MESSAGE);
+       } if(jTextField10.getText().equals("")){
+           JOptionPane.showMessageDialog(null,"Debe escribir un resumen de su tiquete.",
+                   "Error de creación",JOptionPane.ERROR_MESSAGE);
+       } else{
+           ticket.agregar(jTextField1.getText(), jTextField2.getText(),
+                   jTextField3.getText(), jTextField9.getText(),
+                   jComboBox1.getSelectedItem().toString(),
+                   jComboBox2.getSelectedItem().toString(),
+                   jTextField10.getText(), jTextArea1.getText(), "Abierto", "");
+           dispose();
+       }
+       
+       
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int option=JOptionPane.showConfirmDialog(null, "¿Desea cancelar la creación del tiquete?",
+                "Cancelar",JOptionPane.YES_NO_OPTION);
+        if(option==0){
+            dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

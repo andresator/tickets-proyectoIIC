@@ -42,5 +42,106 @@ public class ticketActions extends userDashboard{
                   "¡Error al crear tiquete!","Error",JOptionPane.ERROR_MESSAGE);
       }
    }
+   
+    public void initTicketNum() {
+        int num=100000;
+        try {
+            DataOutputStream salida = new DataOutputStream(new FileOutputStream(
+                    "number.dat"));
+            try {
+                while (true) {
+                    salida.writeInt(num);    
+                }
+            }catch(EOFException ex){
+                salida.close();
+            }
+        }catch(FileNotFoundException ex){
+            JOptionPane.showMessageDialog(null,
+                    "¡Archivo no encontrado!","Archivo no encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+        }catch(IOException ex){
+            JOptionPane.showMessageDialog(null,
+                    "¡Error en el dispositivo!","Error en el dispositivo",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void generateTicketNum() {
+        int tNumber=0;
+        try {
+            DataInputStream entrada = new DataInputStream(new FileInputStream(
+                    "number.dat"));
+            DataOutputStream salida = new DataOutputStream(new FileOutputStream(
+                    "numberUpdate.dat"));
+            try {
+                while (true) {
+                    tNumber = ((entrada.readInt())+1);
+                    salida.writeInt(tNumber);    
+                }
+            }catch(EOFException ex){
+                entrada.close();
+                salida.close();
+                intercambiar();
+            }
+        }catch(FileNotFoundException ex){
+            JOptionPane.showMessageDialog(null,
+                    "¡Archivo no encontrado!","Archivo no encontrado",
+                    JOptionPane.ERROR_MESSAGE);
+        }catch(IOException ex){
+            JOptionPane.showMessageDialog(null,
+                    "¡Error en el dispositivo!","Error en el dispositivo",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void intercambiar(){
+        int tNumber;
+        try{
+           DataInputStream entrada=new DataInputStream(new FileInputStream
+        ("numberUpdate.dat"));
+        DataOutputStream salida=new DataOutputStream(new FileOutputStream
+           ("number.dat"));
+        try{
+           while(true){
+               tNumber=entrada.readInt();
+               salida.writeInt(tNumber);
+           }
+           
+        }catch(EOFException ex){
+           entrada.close();
+           salida.close();
+        }   
+      }catch(FileNotFoundException ex){
+         JOptionPane.showMessageDialog(null,"¡No se encontró el archivo!",
+                 "Archivo no encontrado",JOptionPane.ERROR_MESSAGE);
+      }catch(IOException ex){
+         JOptionPane.showMessageDialog(null,"¡Error en el dispositivo!",
+                 "Error en el dispositivo",JOptionPane.ERROR_MESSAGE);
+      }
+    }
+    
+    public void getTicketNumber(){
+       generateTicketNum();
+       int tNumber = 0;
+        try{
+           DataInputStream entrada=new DataInputStream(new FileInputStream
+        ("number.dat"));
+        try{
+           while(true){
+               tNumber=entrada.readInt();
+           }
+           
+        }catch(EOFException ex){
+           entrada.close();
+        }   
+      }catch(FileNotFoundException ex){
+         JOptionPane.showMessageDialog(null,"¡No se encontró el archivo!",
+                 "Archivo no encontrado",JOptionPane.ERROR_MESSAGE);
+      }catch(IOException ex){
+         JOptionPane.showMessageDialog(null,"¡Error en el dispositivo!",
+                 "Error en el dispositivo",JOptionPane.ERROR_MESSAGE);
+      }
+        JOptionPane.showMessageDialog(null, "El numero es "+String.valueOf(tNumber));
+    } 
      
 }
