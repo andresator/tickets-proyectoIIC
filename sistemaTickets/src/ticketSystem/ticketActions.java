@@ -44,16 +44,16 @@ public class ticketActions extends userDashboard{
    }
    
     public void initTicketNum() {
-        int num=100000;
+        String num="100000";
         try {
             DataOutputStream salida = new DataOutputStream(new FileOutputStream(
                     "number.dat"));
             try {
-                while (true) {
-                    salida.writeInt(num);    
-                }
+                    salida.writeInt(Integer.parseInt(num));    
+                    salida.close();
+                    
             }catch(EOFException ex){
-                salida.close();
+                
             }
         }catch(FileNotFoundException ex){
             JOptionPane.showMessageDialog(null,
@@ -120,7 +120,7 @@ public class ticketActions extends userDashboard{
       }
     }
     
-    public void getTicketNumber(){
+    public String getTicketNumber(){
        generateTicketNum();
        int tNumber = 0;
         try{
@@ -141,7 +141,7 @@ public class ticketActions extends userDashboard{
          JOptionPane.showMessageDialog(null,"¡Error en el dispositivo!",
                  "Error en el dispositivo",JOptionPane.ERROR_MESSAGE);
       }
-        JOptionPane.showMessageDialog(null, "El numero es "+String.valueOf(tNumber));
+        return String.valueOf(tNumber);
     } 
      
 }

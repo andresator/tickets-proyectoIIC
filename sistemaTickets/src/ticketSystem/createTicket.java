@@ -17,6 +17,7 @@ public class createTicket extends javax.swing.JFrame {
         setResizable(false);
         ticketActions ticket=new ticketActions();
         setLocationRelativeTo(null);
+        jTextField1.setText(ticket.getTicketNumber());
 
     }
 
@@ -102,6 +103,7 @@ public class createTicket extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel5.setText("Método contacto:");
 
+        jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
 
         jTextField2.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
