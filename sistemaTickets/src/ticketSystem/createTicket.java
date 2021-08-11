@@ -18,6 +18,7 @@ public class createTicket extends javax.swing.JFrame {
         ticketActions ticket=new ticketActions();
         setLocationRelativeTo(null);
         jTextField1.setText(ticket.getTicketNumber());
+        
 
     }
 
@@ -144,7 +145,7 @@ public class createTicket extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons8-upload-file-32.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/uploadFile.png"))); // NOI18N
         jButton3.setText("Adjuntar archivos");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Correo electronico", "Telefono" }));
