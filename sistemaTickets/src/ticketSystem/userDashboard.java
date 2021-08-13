@@ -11,7 +11,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class userDashboard extends javax.swing.JFrame {
-    protected DefaultTableModel model=new DefaultTableModel();
+    protected DefaultTableModel model=new DefaultTableModel(){
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
+};
     /**
      * Creates new form userDashboard
      */
